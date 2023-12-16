@@ -1,0 +1,44 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# Python env
+venv/
+env/
+*.pyc
+
+# Backup files
+*.bak
+
+# Django generated files
+*.log
+*.pot
+*.pyc
+__pycache__/
+db.sqlite3
+media/
+staticfiles/
+.env
+
+# If using pipenv, specify the Pipfile.lock file
+Pipfile.lock
+
+# Ignore the secret key settings file (if you have one)
+secret_key.txt
+
+# Ignore local development settings
+local_settings.py
+
+# Ignore IDE and text editor-specific files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Ignore database migrations (if you want to include them, remove/comment this line)
+**/migrations/
+
+# Ignore the public/uploads/ directory for user uploads (if you have one)
+public/uploads/

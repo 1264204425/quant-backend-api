@@ -1,0 +1,347 @@
+{% extends 'user/index.html' %}
+{% block main %}
+        <div class="app-content main-content mt-0">
+            <div class="side-app">
+                <div class="main-container container-fluid">
+                                            <div class="page-header">
+                            <div>
+                                <h1 class="page-title">账户总览</h1>
+                            </div>
+                        </div>
+{#                    测试#}
+                    <div class="row row-sm">
+                        <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12">
+                                <div class="card box-shadow-0">
+                                    <div class="card-header border-bottom">
+                                        <img src="../../../static/assets/image/okx_logo.png" alt="" style="max-width:6%; max-height:6%;">
+                                        <h4 class="card-title">欧易 Api绑定(只读)</h4>
+                                    </div>
+                                                                        <div class="card-body">
+                                        <p class="text-muted"></p>
+                                        <form method="post">
+                                            {% csrf_token %}
+                                            <div class="form-group"><label for="exampleInputEmail2">ApiKey</label><input  class="form-control"
+                                                    name="okxApiKey" placeholder="Enter apiKey"></div>
+                                            <div class="form-group"><label
+                                                    for="ApiSecret">Secret</label><input type="password"
+                                                    class="form-control" name="okxApiSecret"
+                                                    placeholder="Enter Api Secret"></div>
+                                            <div class="form-group"><label
+                                                    for="Apipassword">Password</label><input type="password"
+                                                    class="form-control" name="okxApiPassword"
+                                                    placeholder="Enter Api Password"></div>
+<!--                                            <div class="checkbox">-->
+<!--                                                <div class="custom-checkbox custom-control"><input type="checkbox"-->
+<!--                                                        data-checkboxes="mygroup" class="custom-control-input"-->
+<!--                                                        id="checkbox-1"><label for="checkbox-1"-->
+<!--                                                        class="custom-control-label mt-1">Check me Out</label></div>-->
+<!--                                            </div>-->
+{#                                            <a href="http://localhost:8000/index/addokx"><button type="submit" class="btn btn-primary mt-3">提交</button></a>#}
+                                            <a href="http://localhost:8000/account/add_okx_account">
+                                            <button type="submit" class="btn btn-primary mt-3">提交</button></a>
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12">
+                                <div class="card box-shadow-0">
+                                    <div class="card-header border-bottom">
+                                        <img src="../../../static/assets/image/Binance_logo.png" alt="" style="max-width:3%; max-height:3%;">
+                                        <h4 class="card-title">币安Binance Api绑定(只读)</h4>
+                                    </div>
+                                    <div class="card-body">
+
+                                        <p class="text-muted"></p>
+                                        <form method="post">
+                                            {% csrf_token %}
+                                            <div class="form-group"><label>ApiKey
+                                            </label><input  class="form-control"
+                                                     placeholder="Enter apiKey" name="binanceApiKey"></div>
+                                            <div class="form-group">
+                                                <label
+                                                    for="ApiSecret">Secret</label><input type="password"
+                                                    class="form-control" id="B_ApiSecret"
+                                                    placeholder="Enter Api Password" name="binanceApiPassword"></div>
+<!--                                            <div class="form-group"><label-->
+<!--                                                    for="Apipassword">Password</label><input type="password"-->
+<!--                                                    class="form-control" id="B_Apipassword"-->
+<!--                                                    placeholder="Enter 欧易 Password"></div>-->
+<!--&lt;!&ndash;                                            <div class="checkbox">&ndash;&gt;-->
+<!--                                                <div class="custom-checkbox custom-control"><input type="checkbox"-->
+<!--                                                        data-checkboxes="mygroup" class="custom-control-input"-->
+<!--                                                        id="checkbox-1"><label for="checkbox-1"-->
+<!--                                                        class="custom-control-label mt-1">Check me Out</label></div>-->
+<!--                                            </div>-->
+                                            <a href="http://localhost:8000/account/add_binance_account">
+                                            <button type="submit" class="btn btn-primary mt-3" id="okx-refresh-button">提交</button></a>
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+{#                    测试#}
+{#                                        <div class="row">#}
+{#                            <div class="col-md-12">#}
+{#                                <div class="card">#}
+{#                                    <div class="card-header border-bottom">#}
+{#                                        <h3 class="card-title">Api绑定(只读)</h3>#}
+{#                                    </div>#}
+{#                                    <div class="card-body p-6">#}
+{#                                        <div class="panel panel-primary">#}
+{#                                            <div class="tab-menu-heading border-bottom-0">#}
+{#                                                <div class="tabs-menu4 border-bottomo-sm">#}
+{#                                                    <nav class="nav d-sm-flex d-block">#}
+{#                                                        <a class="nav-link border border-bottom-0 br-sm-5 me-2 active"#}
+{#                                                            data-bs-toggle="tab" href="#tab25">OKX欧易 </a>#}
+{#                                                        <a class="nav-link border border-bottom-0 br-sm-5 me-2"#}
+{#                                                            data-bs-toggle="tab" href="#tab26">Binance币安 </a>#}
+{#<!--                                                        <a class="nav-link border border-bottom-0 br-sm-5 me-2"-->#}
+{#<!--                                                            data-bs-toggle="tab" href="#tab27">Tab 3 </a>-->#}
+{#<!--                                                        <a class="nav-link border border-bottom-lg-0 br-sm-5 me-2"-->#}
+{#<!--                                                            data-bs-toggle="tab" href="#tab28">Tab 4 </a>-->#}
+{#                                                    </nav>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                            <div class="panel-body tabs-menu-body">#}
+{#                                                <div class="tab-content">#}
+{#                                                    <div class="tab-pane active " id="tab25">#}
+{#                                                                                        <div class="card box-shadow-0">#}
+{#<!--                                    <div class="card-header border-bottom">-->#}
+{#<!--                                        <h4 class="card-title">确认信息</h4>-->#}
+{#<!--                                    </div>-->#}
+{#                                    <div class="card-body">#}
+{#                                        <p class="text-muted"></p>#}
+{#                                        <form>#}
+{#                                            <div class="form-group"><label for="exampleInputEmail2">ApiKey</label><input type="email" class="form-control"#}
+{#                                                    id="exampleInputEmail2" placeholder="Enter apiKey"></div>#}
+{#                                            <div class="form-group"><label#}
+{#                                                    for="ApiSecret">Secret</label><input type="password"#}
+{#                                                    class="form-control" id="ApiSecret"#}
+{#                                                    placeholder="Enter Api Secret"></div>#}
+{#                                            <div class="form-group"><label#}
+{#                                                    for="Apipassword">Password</label><input type="password"#}
+{#                                                    class="form-control" id="Apipassword"#}
+{#                                                    placeholder="Enter Api Password"></div>#}
+{#<!--                                            <div class="checkbox">-->#}
+{#<!--                                                <div class="custom-checkbox custom-control"><input type="checkbox"-->#}
+{#<!--                                                        data-checkboxes="mygroup" class="custom-control-input"-->#}
+{#<!--                                                        id="checkbox-1"><label for="checkbox-1"-->#}
+{#<!--                                                        class="custom-control-label mt-1">Check me Out</label></div>-->#}
+{#<!--                                            </div>-->#}
+{#                                            <button type="submit" class="btn btn-primary mt-3">提交</button>#}
+{#                                        </form>#}
+{#                                    </div>#}
+{#                                </div>#}
+{##}
+{#                                                    </div>#}
+{#                                                    <div class="tab-pane" id="tab26">#}
+{#                                                        <div class="card-body">#}
+{#                                        <p class="text-muted"></p>#}
+{#                                        <form>#}
+{#                                            <div class="form-group"><label for="exampleInputEmail2">ApiKey</label><input type="email" class="form-control"#}
+{#                                                    id="B_exampleInputEmail2" placeholder="Enter apiKey"></div>#}
+{#                                            <div class="form-group"><label#}
+{#                                                    for="ApiSecret">Secret</label><input type="password"#}
+{#                                                    class="form-control" id="B_ApiSecret"#}
+{#                                                    placeholder="Enter Api Password"></div>#}
+{#<!--                                            <div class="form-group"><label-->#}
+{#<!--                                                    for="Apipassword">Password</label><input type="password"-->#}
+{#<!--                                                    class="form-control" id="B_Apipassword"-->#}
+{#<!--                                                    placeholder="Enter 欧易 Password"></div>-->#}
+{#<!--&lt;!&ndash;                                            <div class="checkbox">&ndash;&gt;-->#}
+{#<!--                                                <div class="custom-checkbox custom-control"><input type="checkbox"-->#}
+{#<!--                                                        data-checkboxes="mygroup" class="custom-control-input"-->#}
+{#<!--                                                        id="checkbox-1"><label for="checkbox-1"-->#}
+{#<!--                                                        class="custom-control-label mt-1">Check me Out</label></div>-->#}
+{#<!--                                            </div>-->#}
+{#                                            <button type="submit" class="btn btn-primary mt-3">提交</button>#}
+{#                                        </form>#}
+{#                                    </div>#}
+{##}
+{#                                                    </div>#}
+{#                                                    <div class="tab-pane" id="tab29">#}
+{#                                                        <p>Sanctus sed aliquyam amet labore labore diam amet magna#}
+{#                                                            takimata dolore,amet sed elitr clita sanctus ipsum,ipsum et#}
+{#                                                            gubergren.Amet sed amet justo sea elitr at,amet ut sed#}
+{#                                                            consetetur ut dolor ut nonumy,dolores labore lorem et labore#}
+{#                                                            elitr clita dolor ipsum takimata,kasd duo eos duo ut at.#}
+{#                                                            Amet.</p>#}
+{#                                                        <p>Lorem amet nonumy nonumy amet est sed gubergren at dolor,est#}
+{#                                                            no justo stet sea lorem diam dolore dolores voluptua,sea#}
+{#                                                            labore rebum sadipscing consetetur accusam,stet takimata#}
+{#                                                            erat eos diam,dolor.</p>#}
+{#                                                    </div>#}
+{#                                                    <div class="tab-pane" id="tab30">#}
+{#                                                        <p>Erat ipsum kasd sadipscing ea dolor. Sit diam consetetur#}
+{#                                                            clita sed clita ut. Amet diam diam magna eos stet#}
+{#                                                            at.Sadipscing dolor consetetur et gubergren erat et. Magna#}
+{#                                                            clita ea sadipscing sit diam sit labore justo. Sea et magna#}
+{#                                                            vero sadipscing sit et dolores et elitr. Eos lorem nonumy#}
+{#                                                            sit est sed.</p>#}
+{#                                                        <p>Diam aliquyam sit sanctus et invidunt elitr. Gubergren elitr#}
+{#                                                            vero kasd et elitr et diam,takimata est consetetur et#}
+{#                                                            sed.Consetetur sadipscing magna diam sadipscing tempor,no#}
+{#                                                            invidunt invidunt accusam ut voluptua no vero duo amet,et#}
+{#                                                            magna diam elitr et ea justo aliquyam takimata tempor.#}
+{#                                                            Eirmod sit et erat dolores invidunt.</p>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#已保存的api信息#}
+                <div class="row row-sm">
+                            <div class="col-lg-6">
+                                <div class="card custom-card">
+                                    <div class="card-header border-bottom">
+                                        <h3 class="card-title">OKX Api 列表</h3>
+                                    </div>
+                                    <div class="card-body">
+{#                                        <p class="text-muted">Using the most basic table markup.</p>#}
+                                        <p><a href="http://localhost:8000/account/delete_okx_api">
+                                                            <button><svg width="28" height="28" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 10V44H39V10H9Z" fill="none" stroke="#000000" stroke-width="2" stroke-linejoin="round"/><path d="M20 20V33" stroke="#000000" stroke-width="2" stroke-linecap="butt" stroke-linejoin="round"/><path d="M28 20V33" stroke="#000000" stroke-width="2" stroke-linecap="butt" stroke-linejoin="round"/><path d="M4 10H44" stroke="#000000" stroke-width="2" stroke-linecap="butt" stroke-linejoin="round"/><path d="M16 10L19.289 4H28.7771L32 10H16Z" fill="none" stroke="#000000" stroke-width="2" stroke-linejoin="round"/></svg></button>
+                                                            Delete All Api</a>
+                                        <div class="table-responsive"></p>
+                                            <table class="table  border text-nowrap text-md-nowrap">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Api Key</th>
+                                                        <th>Secret</th>
+                                                        <th>Password</th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="okx-api-info-table">
+                                                {% for obj in okx_accounts %}
+{#                                                    <tr>#}
+{#                                                        <td>{{ forloop.counter}}</td>#}
+{#                                                        <td>{{ account.apiKey|slice:"6"|add:"****" }}</td>#}
+{#                                                        <td>{{ account.apiSecret|slice:"3"|add:"****" }}</td>#}
+{#                                                        <td>{{ account.apiPassword|slice:"3"|add:"****" }}</td>#}
+{#                                                    </tr>#}
+{#                                                    {{ obj.apiKey|slice:"-3:" }}#}
+                                                    <tr>
+                                                        <td>{{ forloop.counter}}</td>
+                                                        <td>{{ obj.apiKey|slice:"5"}}*************{{ obj.apiKey|slice:"-5:" }}</td>
+                                                        <td>{{ obj.apiSecret|slice:"3"}}************{{ obj.apiSecret|slice:"-5:" }}</td>
+                                                        <td>{{ obj.apiPassword|slice:"3"}}******{{ obj.apiPassword|slice:"-3:" }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+{#保存的binance信息#}
+                            <div class="col-lg-6">
+                                <div class="card custom-card">
+                                    <div class="card-header border-bottom">
+                                        <h3 class="card-title">Binance Api 列表</h3>
+                                    </div>
+                                    <div class="card-body">
+{#                                        <p class="text-muted">Using the most basic table markup.</p>#}
+                                        <p><a href="http://localhost:8000/account/delete_binance_api">
+                                                            <button><svg width="28" height="28" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 10V44H39V10H9Z" fill="none" stroke="#000000" stroke-width="2" stroke-linejoin="round"/><path d="M20 20V33" stroke="#000000" stroke-width="2" stroke-linecap="butt" stroke-linejoin="round"/><path d="M28 20V33" stroke="#000000" stroke-width="2" stroke-linecap="butt" stroke-linejoin="round"/><path d="M4 10H44" stroke="#000000" stroke-width="2" stroke-linecap="butt" stroke-linejoin="round"/><path d="M16 10L19.289 4H28.7771L32 10H16Z" fill="none" stroke="#000000" stroke-width="2" stroke-linejoin="round"/></svg></button>
+                                                            Delete All Api</a>
+                                        <div class="table-responsive"></p>
+                                            <table class="table  border text-nowrap text-md-nowrap">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Api Key</th>
+                                                        <th>Password</th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="okx-api-info-table">
+                                                {% for binance in binance_accounts %}
+{#                                                    <tr>#}
+{#                                                        <td>{{ forloop.counter}}</td>#}
+{#                                                        <td>{{ account.apiKey|slice:"6"|add:"****" }}</td>#}
+{#                                                        <td>{{ account.apiSecret|slice:"3"|add:"****" }}</td>#}
+{#                                                        <td>{{ account.apiPassword|slice:"3"|add:"****" }}</td>#}
+{#                                                    </tr>#}
+{#                                                    {{ obj.apiKey|slice:"-3:" }}#}
+                                                    <tr>
+                                                        <td>{{ forloop.counter}}</td>
+                                                        <td>{{ binance.apiKey|slice:"5"}}*************{{ binance.apiKey|slice:"-5:" }}</td>
+{#                                                        <td>{{ binance.apiSecret|slice:"3"}}***{{ binance.apiSecret|slice:"-3" }}</td>#}
+                                                        <td>{{ binance.apiPassword|slice:"3"}}*******{{ binance.apiPassword|slice:"-3:" }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                 <!--coinmarket 小组件 -->
+                    <div class="row">
+                        <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header border-bottom">
+                                        <h3 class="card-title">币价小组件</h3>
+                            </div>
+                    <script type="text/javascript" src="../../../static/assets/js/coinPriceBlock.js"></script>
+                <div id="coinmarketcap-widget-coin-price-block" coins="1,1027,825,74,1839,3897,2502,8267,52,3890,2,1958" currency="USD" theme="light" transparent="false" show-symbol-logo="true"></div>
+</div>
+                        </div>
+                        </div>
+
+{#                        <div class="page-header">#}
+{#                            <div>#}
+{#                                <h1 class="page-title">Api绑定(只读)</h1>#}
+{#                            </div>#}
+<!--                            <div class="ms-auto pageheader-btn">-->
+<!--                                <ol class="breadcrumb">-->
+<!--                                    <li class="breadcrumb-item"><a href="javascript:void(0);">Advanced UI</a></li>-->
+<!--                                    <li class="breadcrumb-item active" aria-current="page">Tabs</li>-->
+<!--                                </ol>-->
+<!--                            </div>-->
+                        </div>
+
+                </div>
+            </div>
+        </div>
+{% endblock %}
+{#<script>#}
+{#    $(document).ready(function () {#}
+{#        $('#okx-refresh-button').click(function () {#}
+{#            $.ajax({#}
+{#                url: '/api/refresh/',#}
+{#                type: 'GET',#}
+{#                dataType: 'json',#}
+{#                success: function (data) {#}
+{#                    // 更新页面上的数据#}
+{#                },#}
+{#                error: function () {#}
+{#                    alert('刷新失败');#}
+{#                }#}
+{#            });#}
+{#        });#}
+{#    });#}
+{#    success: function (data) {#}
+{#        $('#api-info-table tbody').empty();#}
+{#        for (var i = 0; i < data.length; i++) {#}
+{#            $('#okx-api-info-table tbody').append(#}
+{#                '<tr>' +#}
+                {#'<td>' + data[i].id + '</td>' +#}
+{#                '<td>' + data[i].api_key + '</td>' +#}
+{#                '<td>' + data[i].api_secret + '</td>' +#}
+{#                '<td>' + data[i].api_password + '</td>' +#}
+{#                '</tr>'#}
+{#            );#}
+{#        }#}
+{#    }#}
+{#</script>#}

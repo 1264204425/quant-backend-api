@@ -1,0 +1,23 @@
+                                            <table class="table text-nowrap text-md-nowrap table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>交易对</th>
+                                                        <th>持仓张数</th>
+                                                        <th>杠杆</th>
+                                                        <th>维持保证金率</th>
+                                                        <th>开仓时间</th>
+                                                    </tr>
+                                                </thead>
+                                               <tbody id="okx-api-info-table">
+                                                {% for obj in now_positions %}
+                                                    <tr>
+                                                        <td>{{ forloop.counter}}</td>
+                                                        <td>{{ obj.instId }}</td>
+                                                        <td>{{ obj.pos }}</td>
+                                                        <td>{{ obj.mgnRatio }}</td>
+                                                        <td>{{ obj.cTime_change }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>

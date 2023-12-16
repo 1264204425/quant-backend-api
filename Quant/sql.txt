@@ -1,0 +1,41 @@
+CREATE TABLE order_okx_now_positions (
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    instId VARCHAR(50) NOT NULL,
+    posSide VARCHAR(50) NOT NULL,
+    pos INTEGER NOT NULL,
+    lever INTEGER NOT NULL,
+    avgPx REAL NOT NULL,
+    markPx REAL NOT NULL,
+    liqPx REAL,
+    mgnRatio REAL NOT NULL,
+    cTime_change DATETIME,
+    cTime INTEGER NOT NULL,
+    email_id INTEGER NOT NULL,
+    FOREIGN KEY (email_id) REFERENCES auth_user(id)
+);
+
+CREATE TABLE order_okx_history_positions (
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    email_id INTEGER NOT NULL,
+    cTime_change DATETIME NOT NULL,
+    cTime INTEGER NOT NULL,
+    ccy VARCHAR(10) NOT NULL,
+    closeAvgPx REAL NOT NULL,
+    closeTotalPos INTEGER NOT NULL,
+    direction VARCHAR(10) NOT NULL,
+    instId VARCHAR(50) NOT NULL,
+    instType VARCHAR(10) NOT NULL,
+    lever REAL NOT NULL,
+    mgnMode VARCHAR(10) NOT NULL,
+    openAvgPx REAL NOT NULL,
+    openMaxPos INTEGER NOT NULL,
+    pnl REAL NOT NULL,
+    pnlRatio REAL NOT NULL,
+    posId INTEGER NOT NULL,
+    triggerPx REAL,
+    type INTEGER NOT NULL,
+    uTime_change DATETIME,
+    uTime INTEGER NOT NULL,
+    uly VARCHAR(50) NOT NULL,
+    FOREIGN KEY (email_id) REFERENCES auth_user(id)
+);

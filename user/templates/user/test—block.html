@@ -1,0 +1,208 @@
+{#{% extends 'user/block.html' %}#}
+{##}
+{#{% block index %}#}
+{#<p>789</p>#}
+{#{% endblock %}#}
+{#{% block two %}#}
+{#<p>5455</p>#}
+{#{% endblock %}#}
+
+{% extends 'user/index.html' %}
+{% block main %}
+    <div class="app-content main-content mt-0">
+    <!--<p>{{ date_list }}</p><p>{{ ahr999 }}</p>-->
+        <div class="side-app">
+            <div class="main-container container-fluid" style="height: 800px">
+                <!--开始表格 -->
+                <div id="container" style="height: 100%;margin-top: 10px"></div>
+
+                <script type="text/javascript" src="../../../static/assets/js/d3.v4.min.js"></script>
+                <script type="text/javascript"
+                        src="../../../static/assets/js/echarts.min.js"></script>
+
+                <script type="text/javascript">
+                    var dom = document.getElementById('container');
+                    var myChart = echarts.init(dom, null, {
+                        renderer: 'canvas',
+                        useDirtyRect: false
+                    });
+                    var app = {};
+
+                    var option;
+                    var date = {{ date_list | safe }};
+                    var data = {{ ahr999 | safe }};
+
+//                    let base = +new Date(1968, 9, 3);
+//                    let oneDay = 24 * 3600 * 1000;
+//                    let date = [];
+//                    let data = [Math.random() * 300];
+//                    for (let i = 1; i < 20000; i++) {
+//                        var now = new Date((base += oneDay));
+//                        date.push([now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'));
+//                        data.push(Math.round((Math.random() - 0.5) * 20 + data[i - 1]));
+//                    }
+                    console.log(date);
+                    console.log(data);
+
+                    option = {
+                        //提示框
+                        tooltip: {
+                            //trigger: 'item',
+                            trigger: 'axis',
+                            //position: function (pt) {
+                            //    return [pt[0], '50%'];
+                            //},
+                            formatter: '{a} <br/>{b} : {c}',
+                            //axisPointer 配置项，表示轴指示器的配置
+                             axisPointer: {
+                                 type: 'cross',
+                                 //link: ['y'],
+                                 //snap: true,
+                                 //lineStyle: {
+                                 //    color: 'rgb(142,166,215)',
+                                 //    width: 2,
+                                 //},
+                                 //crossStyle: {
+                                 //    color: '#ff0000',
+                                 //    width: 2,
+                                 //}
+                             },
+                        },
+                        title: {
+                            left: 'center', //标题标题位置
+                            text: 'Ahr999屯币指数', //主标题
+                            subtext: '(小于0.45,抄底区间; 0.45-1.2,定投区间; 大于5,起飞区间;)' //副标题
+                        },
+                        //toolbox 内置工具栏 右上角的关系
+                        toolbox: {
+                            feature: {
+                                dataZoom: {
+                                    yAxisIndex: 'none'
+                                },
+                                restore: {},
+                                saveAsImage: {}
+                            }
+                        },
+                        xAxis: {
+                            show: true, //show: true，表示显示 x 轴和 y 轴。
+                            type: 'category', //坐标轴类型，值category/value，与y轴呼应，若x轴配置category则y轴配置value
+                            boundaryGap: false, // 坐标轴两边留白策略，也可以使用布尔值，true居中
+                            data: date
+                            //data:['2013/11/15', '2013/11/16', '2013/11/17']
+                            //data: {{ date_list }}
+                        },
+                        yAxis: {
+                            show: true, //show: true，表示显示 x 轴和 y 轴。
+                            type: 'value',
+                            boundaryGap: [0, '100%']
+                        },
+                        //dataZoom 组件用于区域缩放，从而能自由关注细节的数据信息，或者概览数据整体，或者去除离群点的影响。
+                        dataZoom: [
+                            {
+                                type: 'inside',
+                                start: 0,
+                                end: 10
+                            },
+                            {
+                                start: 0,
+                                end: 10
+                            }
+                        ],
+                        series: [
+                            {
+                                name: 'Ahr999', //线的名字
+                                type: 'line',
+                                symbol: 'circle', //symbol: 'circle'，表示使用圆形作为标记点的形状。
+                                symbolSize: 10, //表示不显示标记点。
+                                showSymbol:false,
+                                silent: false,
+                                sampling: 'lttb',
+                                lineStyle: {
+                                    color: 'rgb(142,166,215)',
+                                },
+                                //itemStyle.color 设置标记点的填充色，itemStyle.borderColor 设置标记点的边框颜
+                                itemStyle: {
+                                    //seriesColor : 'rgb(142,166,215)',
+                                    color: 'rgb(113,155,166)',
+                                    //symbolColor : 'rgb(16,18,23)',
+//                                    shadowBlur: 20,//发光图形阴影的模糊大小
+//                                    shadowColor: 'rgb(250,255,0)'//阴影颜色
+                                    borderColor : 'rgb(199,213,255)',
+                                    borderWidth : 2,
+                                },
+//                                label:{
+//                                   show: true,
+//                                    formatter: '{c}',
+//                                },
+                                 // 区域填充样式
+                                areaStyle: {
+                                    color: {
+                                        type: 'linear',
+                                        x: 0,
+                                        y: 0,
+                                        x2: 0,
+                                        y2: 1,
+                                        colorStops: [{
+                                            offset: 0, color: 'rgba(58,132,255, 0.5)' // 0% 处的颜色
+                                        }, {
+                                            offset: 1, color: 'rgba(58,132,255, 0)' // 100% 处的颜色
+                                        }],
+                                        global: false // 缺省为 false
+                                    }
+                                },
+                                markLine: {
+                                    symbol: ['none', 'none'], // none为标线两端的样式为无，可更改
+                                    data: [
+                                        {
+                                            silent: false,
+                                            yAxis: 5,  // 表现自定义的位置，可赋值
+                                            label: {
+                                                position: 'start', // 表现内容展示的位置
+                                                formatter: '起飞区间',  // 标线展示的内容
+                                                color: '#8C8C8C'  // 展示内容颜色
+                                            },
+                                            // lineStyle: { type: 'solid', color: '#fc2323', width: 3 } // 样式： 线型、颜色、线宽
+                                            lineStyle: {type: 'dashed', color: '#fc2323', width: 2} // 样式： 线型、颜色、线宽
+
+                                        },
+                                        {
+                                            silent: false,
+                                            yAxis: 1.2,  // 表现自定义的位置，可赋值
+                                            label: {
+                                                position: 'start', // 表现内容展示的位置
+                                                formatter: '定投线',  // 标线展示的内容
+                                                color: '#8C8C8C'  // 展示内容颜色
+                                            },
+                                            lineStyle: {type: 'dashed', color: '#00d0ff', width: 2} // 样式： 线型、颜色、线宽
+                                        },
+                                        {
+                                            silent: false,
+                                            yAxis: 0.45,  // 表现自定义的位置，可赋值
+                                            label: {
+                                                position: 'start', // 表现内容展示的位置
+                                                formatter: '抄底线',  // 标线展示的内容
+                                                color: '#8C8C8C'  // 展示内容颜色
+                                            },
+                                            lineStyle: {type: 'dashed', color: '#8cea3a', width: 2} // 样式： 线型、颜色、线宽
+                                        },
+                                    ]
+                                },
+                                //data:[15.3577, 16.1816, 19.9608, 27.9044]
+                                data: data
+                                //data: {{ ahr999 }}
+
+                            }
+                        ],
+
+                    };
+
+                    if (option && typeof option === 'object') {
+                        myChart.setOption(option);
+                    }
+
+                    window.addEventListener('resize', myChart.resize);
+                </script>
+            </div>
+        </div>
+    </div>
+{% endblock %}

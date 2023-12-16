@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>apiKey</th>
+      <th>apiSecret</th>
+      <th>apiPassword</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for obj in okx_accounts %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ obj.apiKey }}</td>
+      <td>{{ obj.apiSecret }}</td>
+      <td>{{ obj.apiPassword }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+</body>
+</html>

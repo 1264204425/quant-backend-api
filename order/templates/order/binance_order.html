@@ -1,0 +1,268 @@
+{% extends 'user/index.html' %}
+{% block main %}
+    <div class="app-content main-content mt-0">
+        <div class="side-app">
+            <div class="main-container container-fluid">
+                <div class="page-header">
+                    <div class="col-md-12"><h1 class="page-title">OKX 订单</h1><br>
+                        <button class="btn btn-primary" style='margin-left: auto;margin-right: auto'>一键刷新
+                        </button>
+                    </div>
+
+                </div>
+                {#            当前仓位展示#}
+                <div class="row row-sm">
+                    <div class="col-lg-12">
+                        <div class="card custom-card">
+                            {#                                    <div class="card-header border-bottom">#}
+                            {#                                        <h3 class="card-title">Bordered Table</h3>#}
+                            {#                                    </div>#}
+                            <div class="card-body">
+                                <div class="col-md-10">
+                                    <p class="text-muted">当前合约持仓</p></div>
+                                {#                                        <div class="d-flex align-items-center">#}
+                                {#  <button class="btn btn-primary mt-3">一键平仓</button>#}
+                                {#</div>#}
+                                <div class="table-responsive">
+                                    <table class="table text-nowrap text-md-nowrap table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>交易对</th>
+                                            <th>持仓张数</th>
+                                            <th>杠杆</th>
+                                            <th>持仓均价</th>
+                                            <th>收益率</th>
+                                            <th>维持保证金率</th>
+                                            <th>开仓时间</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="okx-api-info-table">
+                                        {% for obj in now_positions %}
+                                            <tr>
+                                                <td>{{ forloop.counter }}</td>
+                                                <td>{{ obj.instId }}</td>
+                                                <td>{{ obj.pos }}</td>
+                                                <td>{{ obj.lever }}</td>
+                                                <td>{{ obj.avgPx }}</td>
+                                                <td>{{ obj.benefits|floatformat:2 }}%</td>
+                                                <td>{{ obj.mgnRatio|floatformat:2 }}</td>
+                                                <td>{{ obj.cTime_change }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {#历史仓位展示#}
+                <div class="row row-sm">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header border-bottom">
+                                <h3 class="card-title">历史持仓</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive export-table">
+                                    <div id="file-datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-6">
+                                                {#                                                <div class="dataTables_length" id="file-datatable_length"><label><select#}
+                                                {#                                                        name="file-datatable_length" aria-controls="file-datatable"#}
+                                                {#                                                        class="form-select form-select-sm select2 select2-hidden-accessible"#}
+                                                {#                                                        tabindex="-1" aria-hidden="true">#}
+                                                {#                                                    <option value="10">10</option>#}
+                                                {#                                                    <option value="25">25</option>#}
+                                                {#                                                    <option value="50">50</option>#}
+                                                {#                                                    <option value="100">100</option>#}
+                                                {#                                                </select>#}
+                                                {#                                                    </label></div>#}
+                                                <div class="dt-buttons ">
+                                                    <a href="{% url 'get_history_orders' %}">
+                                                    <button class="btn btn-primary buttons-excel buttons-html5"
+                                                            tabindex="0" aria-controls="file-datatable" type="button">
+                                                        <span>Excel</span></button></a>
+                                                </div>
+                                            </div>
+                                            {#                                            <div class="col-sm-12 col-md-6">#}
+                                            {#                                                <div id="file-datatable_filter" class="dataTables_filter"><label><input#}
+                                            {#                                                        type="search" class="form-control form-control-sm"#}
+                                            {#                                                        placeholder="Search..." aria-controls="file-datatable"></label>#}
+                                            {#                                                </div>#}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <table id="file-datatable"
+                                                   class="table table-bordered text-nowrap key-buttons border-bottom w-100 dataTable no-footer dtr-inline collapsed"
+                                                   role="grid" aria-describedby="file-datatable_info"
+                                                   style="width: 655px;">
+                                                <thead>
+                                                <tr role="row">
+                                                    <th>ID
+                                                    </th>
+                                                    <th>
+                                                        交易对
+                                                    </th>
+{#                                                    <th>#}
+{#                                                        平仓总量#}
+{#                                                    </th>#}
+                                                    <th>
+                                                        仓位方向
+                                                    </th>
+                                                    <th>
+                                                        杠杆倍数
+                                                    </th>
+                                                    <th>
+                                                        持仓盈亏率
+                                                    </th>
+                                                    <th>
+                                                        持仓盈亏
+                                                    </th>
+                                                    <th>
+                                                        开仓时间
+                                                    </th>
+                                                    <th>
+                                                        平仓时间
+                                                    </th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+
+{#ID	交易对	平仓总量	仓位方向	杠杆倍数	杠杆倍数	持仓盈亏率	持仓盈亏	开仓时间	平仓时间#}
+                                                {% for obj in page_obj %}
+                                                    <tr>
+                                                        <td>{{ forloop.counter }}</td>
+{#                                                        <td>{{ counter }}</td>#}
+                                                        <td>{{ obj.instId }}</td>
+{#                                                        <td>{{ obj.closeTotalPos }}</td>#}
+                                                        <td>{{ obj.direction }}</td>
+                                                        <td>{{ obj.lever }}</td>
+                                                        <td>{{ obj.pnlRatio|floatformat:2 }}%</td>
+                                                        <td> {{ obj.pnl|floatformat:2 }}U</td>
+                                                        <td>{{ obj.cTime_change}}</td>
+                                                        <td>{{ obj.uTime_change }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                <div class="pagination">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                         {% if page_obj.has_other_pages %}
+    <ul class="pagination">
+        {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo;</a>
+            </li>
+        {% else %}
+            <li class="disabled page-item">
+                <a class="page-link">&laquo;</a>
+            </li>
+        {% endif %}
+        {% for i in page_obj.paginator.page_range %}
+            {% if page_obj.number == i %}
+                <li class="active page-item">
+                    <a href="#" class="page-link">{{ i }}</a>
+                </li>
+            {% else %}
+                <li class="page-item">
+                    <a href="?page={{ i }}" class="page-link">{{ i }}</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+            <li class="page-item">
+                <a href="?page={{ page_obj.next_page_number }}" class="page-link">&raquo;</a>
+            </li>
+        {% else %}
+            <li class="disabled page-item">
+                <a class="page-link">&raquo;</a>
+            </li>
+        {% endif %}
+    </ul>
+{% endif %}
+                                    </div>
+                                    </div>
+                                </div>
+
+
+{#                                <div class="pagination">#}
+{#                                    <div class="row">#}
+                                        {#                                            <div class="col-sm-12 col-md-4">#}
+                                        {#                                            </div>#}
+{#                                        <div class="col-sm-12 col-md-12">#}
+{#                                            <div class="dataTables_paginate paging_simple_numbers"#}
+{#                                                 id="file-datatable_paginate">#}
+{#                                                <ul class="pagination">#}
+{#                                                    {% if page.has_previous %}#}
+{#                                                        <li class=" paginate_button page-item previous disabled#}
+{#                                                "#}
+{#                                                id="file-datatable_previous"><a href="#"#}
+{#                                                                                aria-controls="file-datatable"#}
+{#                                                                                data-dt-idx="0" tabindex="0"#}
+{#                                                                                class="page-link">Previous</a>#}
+{#                                                </li>#}
+{#                                                <li class="paginate_button page-item active"><a href="?page=1"#}
+{#                                                                                                aria-controls="file-datatable"#}
+{#                                                                                                data-dt-idx="1"#}
+{#                                                                                                tabindex="0"#}
+{#                                                                                                class="page-link">1</a>#}
+{#                                                </li>#}
+{#                                                    {% endif %}#}
+{#                                                <li class="paginate_button page-item">#}
+{#                                                    Page {{ page.number }} of {{ page.paginator.num_pages }}.#}
+{#                                                </li>#}
+{#                                                <li class="paginate_button page-item "><a href="#"#}
+{#                                                                                          aria-controls="file-datatable"#}
+{#                                                                                          data-dt-idx="2"#}
+{#                                                                                          tabindex="0"#}
+{#                                                                                          class="page-link">2</a>#}
+{#                                                </li>#}
+{#                                                <li class="paginate_button page-item "><a href="#"#}
+{#                                                                                          aria-controls="file-datatable"#}
+{#                                                                                          data-dt-idx="3"#}
+{#                                                                                          tabindex="0"#}
+{#                                                                                          class="page-link">3</a>#}
+{#                                                </li>#}
+{#                                                <li class="paginate_button page-item "><a href="#"#}
+{#                                                                                          aria-controls="file-datatable"#}
+{#                                                                                          data-dt-idx="4"#}
+{#                                                                                          tabindex="0"#}
+{#                                                                                          class="page-link">4</a>#}
+{#                                                </li>#}
+{#                                                <li class="paginate_button page-item "><a href="#"#}
+{#                                                                                          aria-controls="file-datatable"#}
+{#                                                                                          data-dt-idx="5"#}
+{#                                                                                          tabindex="0"#}
+{#                                                                                          class="page-link">5</a>#}
+{#                                                </li>#}
+{#                                                <li class="paginate_button page-item "><a href="#"#}
+{#                                                                                          aria-controls="file-datatable"#}
+{#                                                                                          data-dt-idx="6"#}
+{#                                                                                          tabindex="0"#}
+{#                                                                                          class="page-link">6</a>#}
+{#                                                </li>#}
+{#                                                <li class="paginate_button page-item next"#}
+{#                                                    id="file-datatable_next"><a href="#"#}
+{#                                                                                aria-controls="file-datatable"#}
+{#                                                                                data-dt-idx="7" tabindex="0"#}
+{#                                                                                class="page-link">Next</a></li>#}
+{#                                                </ul>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}
